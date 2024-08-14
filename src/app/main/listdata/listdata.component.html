@@ -1,0 +1,54 @@
+<div class="inpfield">
+  <form [formGroup]="listForm">
+  <input type="search" class="search" placeholder="Searching"   name="designation"  #designation formControlName="searchTerm">
+  <input type="date" class="search" placeholder="Start date" formControlName="dateOne"  name="designation"  #designation >
+  <input type="date" class="search" placeholder="End date" formControlName="dateTwo" [min]="listForm.get('dateOne').value"  name="designation"  #designation  >
+  <select class="selecttt"
+  formControlName="status" placeholder="status"  >
+  <!-- <option value="" >Select status</option> -->
+    <option value="1" >active</option>
+    <option value="0">inactive</option>
+  </select>
+  <!-- <input type="search" class="search" placeholder="status"  (keypress)="getEmployeeList(designation)" name="designation"  #designation> -->
+  <button class="btn btn-primary" (click)="getEmployeeList(designation)">submit</button>
+  <button class="btn btn-warning dnger" (click)="onReset(listForm)" >Reset</button>
+</form>
+</div>
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Sr.N</th>
+        <th scope="col">Empname</th>
+        <th scope="col">Email</th>
+        <th scope="col">designation</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emplyee of emplyeeList | paginate: config; let i = index;">
+        <td>{{i+(config.currentPage - 1) * config.itemsPerPage + 1 }}</td>
+        <!-- <td>{{emplyee.empid}}</td>  -->
+        <td>{{emplyee.empname}}</td>
+        <td>{{emplyee.Email}}</td>
+        <td>{{emplyee.designation}}</td>
+        <td><button class="btn btn-danger" (click)="onDelete(emplyee.empid)">delete</button></td>
+        <td><a><button class="btn btn-secondary" (click)="onEdit(emplyee.empid)" >Edit</button></a></td>
+        <td >
+          <div>
+              <input class="form-check-input" type="checkbox"
+                  [checked]="emplyee.status == 1 ? true: false">
+          </div>
+      </td>
+      </tr> 
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <ng-container *ngIf="emplyeeList">
+      <div class="col-sm-8">
+
+        <pagination-controls   (pageChange)="pageChange($event)" class="my-pagination"> </pagination-controls>
+      
+      </div>
+    </ng-container>
+  </div>

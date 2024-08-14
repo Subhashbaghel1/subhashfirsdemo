@@ -1,0 +1,18 @@
+<div class="login_form_box">
+    <h2 class="text-center">Forgot Password</h2>
+    <form [formGroup]="forgetForm">
+      <div class="form-group mb-20">
+        <label>Email</label>
+        <input type="text" formControlName="Email" placeholder="Username" class="form-control abc">
+        <div *ngIf="(forgetForm.get('Email').invalid && forgetForm.get('Email').touched) || forgetForm.get('Email').dirty">
+          <small class="text-danger" *ngIf="forgetForm.get('Email').errors?.required">Email address is required</small>
+          <small class="text-danger" *ngIf="forgetForm.get('Email').errors?.pattern">Email address is invalid</small>
+          <!-- <span  class="{{status?'sucseess-text':'error-text'}}">{{message}}</span> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-secondary werr" [disabled]="forgetForm.invalid" (click)="Forget()">Forget Password</button>
+        <button class="btn btn-danger"  (click)="Reset()"> Reset Password</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,38 @@
+<div class="login_form_box">
+    <h2 class="text-center"> Reset Password</h2>
+    <form [formGroup]="resetForm">
+        <div class="form-group mb-20">
+            <label>Email</label>
+            <input type="text" formControlName="Email" placeholder="Username" class="form-control abc">
+            <div
+                *ngIf="(resetForm.get('Email').invalid && resetForm.get('Email').touched) || resetForm.get('Email').dirty">
+                <small class="text-danger" *ngIf="resetForm.get('Email').errors?.required">Email address is
+                    required</small>
+                <small class="text-danger" *ngIf="resetForm.get('Email').errors?.pattern">Email address is
+                    invalid</small>
+                <!-- <span  class="{{status?'sucseess-text':'error-text'}}">{{message}}</span> -->
+            </div>
+        </div>
+        <div class="form-group mb-20">
+            <label> Otp</label>
+            <input type="text" formControlName="Otp" placeholder="Password" class="form-control" minlength="5"
+                maxlength="10">
+            <p class="text-danger"
+                *ngIf="resetForm.get('Otp').hasError('required') && resetForm.get('Otp').touched">
+                Otp is
+                required!</p>
+        </div>
+        <div class="form-group mb-20">
+            <label> New password</label>
+            <input type="text" formControlName="newPassword" placeholder="Password" class="form-control" minlength="5"
+                maxlength="10">
+            <p class="text-danger"
+                *ngIf="resetForm.get('newPassword').hasError('required') && resetForm.get('newPassword').touched">
+                newPassword is
+                required!</p>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="onReset()">ChangePassword</button>
+        </div>
+    </form>
+</div>

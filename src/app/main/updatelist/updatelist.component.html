@@ -1,0 +1,35 @@
+<div class="login_form_box">
+    <h2 class="text-center">Update List</h2>
+    <form [formGroup]="updateForm" >
+        <div class="form-group mb-20">
+            <label> Name </label>
+            <input  formControlName="empname" placeholder="Username" id="name" name="name" value="" type="text" class="form-control" (keypress)="letterOnly($event)">
+            <p class="text-danger" *ngIf="updateForm.get('empname').hasError('required') && updateForm.get('empname').touched"> Name is required!</p>
+        </div>
+        <div class="form-group mb-20">
+            <label>Email</label>
+            <input formControlName="Email"  placeholder="Username" id="username" name="username" value="" type="text" class="form-control">
+            <div *ngIf="(updateForm.get('Email').invalid && updateForm.get('Email').touched) || updateForm.get('Email').dirty">
+                <small class="text-danger" *ngIf="updateForm.get('Email').errors?.required">Email address is
+                    required</small>
+                <small class="text-danger" *ngIf="updateForm.get('Email').errors?.pattern">Email address is
+                    invalid</small>
+            </div>
+        </div>
+        <div class="form-group mb-20">
+            <label>Designation</label>
+            <input formControlName="designation"  placeholder="Designation" id="designation" name="designation" value="" type="text" class="form-control" (keypress)="letterOnly($event)">
+            <p class="text-danger"
+                *ngIf="updateForm.get('designation').hasError('required') && updateForm.get('designation').touched"> Date of joining
+                is required!</p>
+        </div>
+        <!-- <div class="form-group mb-20">
+            <label>Password</label>
+            <input formControlName="password"  placeholder="password" id="password" name="password" value="" type="text" class="form-control">
+        </div> -->
+       
+        <div class="form-group">
+            <button class="btn btn-primary" (click)="Update()">Update</button>
+        </div>
+    </form>
+</div>
